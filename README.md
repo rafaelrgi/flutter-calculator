@@ -1,6 +1,7 @@
 # Flutter-Calculator
 
 A simple, yet robust Flutter project demonstrating a fully functional Calculator application capable of the four basic arithmetic operations. This app is designed to showcase modern development practices and sound architecture within the Flutter ecosystem.
+All the calculatr logic is implemented in the app, without using third part math packages/libraries.
 
 ### Key Features & Technical Highlights
 This project adheres to current best practices, focusing on maintainability, scalability, and testability:
@@ -15,3 +16,4 @@ This project adheres to current best practices, focusing on maintainability, sca
 &emsp;&emsp;&emsp;
 <img src="_screenshots/02.jpg" width="256">
 &emsp;&emsp;&emsp;
+
