@@ -4,9 +4,21 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   final calculatorViewModel = CalcViewModel();
 
-  test('2 ±', () async {
-    //Setup
+  setUp(() {
     calculatorViewModel.onButton('C');
+  });
+
+  test('divide by zero ', () async {
+    //Act
+    calculatorViewModel.onButton('8');
+    calculatorViewModel.onButton('÷');
+    calculatorViewModel.onButton('0');
+    calculatorViewModel.onButton('=');
+    //Assert
+    expect(calculatorViewModel.display.toLowerCase(), 'error');
+  });
+
+  test('2 ±', () async {
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('±');
@@ -15,8 +27,6 @@ void main() {
   });
 
   test('2 ± ±', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('±');
@@ -26,8 +36,6 @@ void main() {
   });
 
   test('2 + 2 = ', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('+');
@@ -38,8 +46,6 @@ void main() {
   });
 
   test('2 - 3 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('-');
@@ -50,8 +56,6 @@ void main() {
   });
 
   test('2 x 3 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('x');
@@ -62,8 +66,6 @@ void main() {
   });
 
   test('12 ÷ 2 = ', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('1');
     calculatorViewModel.onButton('2');
@@ -75,8 +77,6 @@ void main() {
   });
 
   test('- 8 ÷ 2 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('-');
     calculatorViewModel.onButton('8');
@@ -88,8 +88,6 @@ void main() {
   });
 
   test('2 + 2 = - 3 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('+');
@@ -103,8 +101,6 @@ void main() {
   });
 
   test('2 + 2 - 3', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('+');
@@ -117,8 +113,6 @@ void main() {
   });
 
   test('9 + - 3 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('9');
     calculatorViewModel.onButton('+');
@@ -130,8 +124,6 @@ void main() {
   });
 
   test('4 - + 3 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('4');
     calculatorViewModel.onButton('-');
@@ -143,8 +135,6 @@ void main() {
   });
 
   test('2 / x 3 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('/');
@@ -156,8 +146,6 @@ void main() {
   });
 
   test('9 + - 3 + 2 / 4 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('9');
     calculatorViewModel.onButton('+');
@@ -173,8 +161,6 @@ void main() {
   });
 
   test('2 / 3 + ', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('÷');
@@ -185,8 +171,6 @@ void main() {
   });
 
   test('8 / 2 - 3 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('8');
     calculatorViewModel.onButton('÷');
@@ -199,8 +183,6 @@ void main() {
   });
 
   test('2 + 5 x 3 =', () async {
-    //Setup
-    calculatorViewModel.onButton('C');
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('+');

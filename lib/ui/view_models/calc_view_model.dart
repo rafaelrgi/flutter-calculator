@@ -14,42 +14,48 @@ class CalcViewModel extends ChangeNotifier {
   String get operator => _getOperator();
 
   void onButton(String button) {
-    switch (button) {
-      case 'C':
-        _buttonClear();
-        break;
-      case 'CE':
-        _buttonClearEntry();
-        break;
-      case '.':
-        _buttonDecimal();
-        break;
-      case '±':
-        _buttonPlusMinus();
-        break;
-      case '+':
-        _buttonPlus();
-        break;
-      case '-':
-        _buttonMinus();
-        break;
-      case '÷':
-      case '/':
-        _buttonDivide();
-        break;
-      case 'x':
-        _buttonMultiply();
-        break;
-      case '=':
-        _buttonTotal();
-        break;
-      //number
-      default:
-        _display = (_insertMode || _display == '0')
-            ? button
-            : _display + button;
-        _insertMode = false;
+    try {
+      switch (button) {
+        case 'C':
+          _buttonClear();
+          break;
+        case 'CE':
+          _buttonClearEntry();
+          break;
+        case '.':
+          _buttonDecimal();
+          break;
+        case '±':
+          _buttonPlusMinus();
+          break;
+        case '+':
+          _buttonPlus();
+          break;
+        case '-':
+          _buttonMinus();
+          break;
+        case '÷':
+        case '/':
+          _buttonDivide();
+          break;
+        case 'x':
+          _buttonMultiply();
+          break;
+        case '=':
+          _buttonTotal();
+          break;
+        //number
+        default:
+          _display = (_insertMode || _display == '0')
+              ? button
+              : _display + button;
+          _insertMode = false;
+      }
+    } catch (e) {
+      _display = e.toString();
+      _insertMode = true;
     }
+
     notifyListeners();
   }
 
@@ -145,13 +151,13 @@ class CalcViewModel extends ChangeNotifier {
       case _Operations.multiply:
         return op1 * op2;
       case _Operations.divide:
-        if (op2 != 0) {
-          return op1 / op2;
+        if (op2 == 0) {
+          throw 'Error';
         }
+        return op1 / op2;
       default:
         return 0;
     }
-    return 0;
   }
 
   void _doOperation(_Operations operator) {
