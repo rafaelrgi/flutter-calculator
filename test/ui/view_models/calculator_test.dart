@@ -8,7 +8,7 @@ void main() {
     calculatorViewModel.onButton('C');
   });
 
-  test('divide by zero ', () async {
+  test('divide by zero = Error', () async {
     //Act
     calculatorViewModel.onButton('8');
     calculatorViewModel.onButton('÷');
@@ -100,7 +100,7 @@ void main() {
     expect(calculatorViewModel.display, '1');
   });
 
-  test('2 + 2 - 3', () async {
+  test('2 + 2 - 3 =', () async {
     //Act
     calculatorViewModel.onButton('2');
     calculatorViewModel.onButton('+');

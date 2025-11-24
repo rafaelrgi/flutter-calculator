@@ -8,12 +8,17 @@ class CalcViewModel extends ChangeNotifier {
   double _op1 = 0;
   _Operations _operator = _Operations.none;
   bool _insertMode = false; //as computer insert key; overwrites text of display
+  bool _isError = false; //error state, like ÷0
 
   String get display => _display;
   String get previous => '${_format(_op1)} ${_getOperator()}';
   String get operator => _getOperator();
 
+  //process calculator buttons dispatching the call to  the right method
   void onButton(String button) {
+    //if previous state = error, clear it on any button
+    if (_isError) _buttonClear();
+
     try {
       switch (button) {
         case 'C':
@@ -52,13 +57,17 @@ class CalcViewModel extends ChangeNotifier {
           _insertMode = false;
       }
     } catch (e) {
+      //if error, clear the calculation and tell the user
+      _buttonClear();
       _display = e.toString();
       _insertMode = true;
+      _isError = true;
     }
 
     notifyListeners();
   }
 
+  //format number for the display
   String _format(double val) {
     var s = val.toString();
     if (s.endsWith('.0')) {
@@ -67,31 +76,39 @@ class CalcViewModel extends ChangeNotifier {
     return s;
   }
 
+  //C: clears all
   void _buttonClear() {
     _op1 = 0;
     _display = '0';
     _operator = _Operations.none;
     _insertMode = false;
+    _isError = false;
   }
 
+  //CE: clears only the display
   void _buttonClearEntry() {
     _display = '0';
   }
 
+  //yes, the decimal separator
   void _buttonDecimal() {
     if (_insertMode) {
       if (_op1 == 0) {
         _op1 = _getValueFromDisplay();
       }
-      _display = '0,';
+      _display = '0.';
       _insertMode = false;
       return;
     }
-    if (_display.contains(',')) return;
-    _display += ',';
+    if (_display.contains('.')) return;
+    _display += '.';
   }
 
+  //invert the number in the display (positive/negative)
   void _buttonPlusMinus() {
+    //-0 is weird
+    if (_display == '0') return;
+
     if (_display.startsWith('-')) {
       _display = _display.substring(1);
     } else {
@@ -115,6 +132,7 @@ class CalcViewModel extends ChangeNotifier {
     _doOperation(_Operations.divide);
   }
 
+  //= calculate the operation
   void _buttonTotal() {
     _doOperation(_Operations.none);
   }
@@ -178,6 +196,7 @@ class CalcViewModel extends ChangeNotifier {
     //store new operation
     _operator = operator;
 
+    //- needs special treatment, may be just a negative number beeing typed
     if (operator == _Operations.subtract) {
       _display = '-';
       _insertMode = false;
