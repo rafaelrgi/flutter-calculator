@@ -8,6 +8,7 @@ All the calculation logic is implemented in the app, without using third part ma
 ### Key Features & Technical Highlights
 This project adheres to current best practices, focusing on maintainability, scalability, and testability:
 
+- CI/CD: Using Github Actions for automatic build and test
 - State Management: Utilizes ChangeNotifier as the core mechanism for state change notification, following the current official Flutter recommendations.
 - Architecture: Implements the MVVM pattern (Model-View-ViewModel, the current official Flutter recommendation), ensuring a clear separation of business logic (Model/ViewModel) from the presentation layer (View).
 - Dependency Injection (DI): Uses GetIt for service location and robust dependency injection, effectively decoupling core application services and ViewModels from the UI layer.
@@ -17,6 +18,8 @@ This project adheres to current best practices, focusing on maintainability, sca
 <img src="_screenshots/01.jpg" width="256">
 &emsp;&emsp;&emsp;
 <img src="_screenshots/02.jpg" width="256">
+&emsp;&emsp;&emsp;
+<img src="_screenshots/03.jpg" >
 &emsp;&emsp;&emsp;
 
 
