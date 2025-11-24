@@ -25,7 +25,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: 3.38.1
-          channel: stable          
 
       - name: Install dependencies
         run: flutter pub get
@@ -42,4 +41,5 @@ jobs:
           name: coverage
 
           path: coverage/lcov.info
+
 
